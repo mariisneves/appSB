@@ -1,199 +1,174 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Switch, Picker, TextInput, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, Switch, Chechbox, TextInput, TouchableOpacity } from 'react-native';
+import styles from './assets/estilo';
+import firebase from './assets/firebaseConnect';
+import AppLoading from 'expo-app-loading';
+import {
+  useFonts, SourceSansPro_300Light, SourceSansPro_300Light_Italic, SourceSansPro_400Regular,
+  SourceSansPro_400Regular_Italic, SourceSansPro_600SemiBold, SourceSansPro_600SemiBold_Italic,
+  SourceSansPro_700Bold,
+} from '@expo-google-fonts/source-sans-pro';
 
-  // import Slider from '@react-native-community/slider';
-  
-  export default class App extends Component{
+// export default () => {
+//   let [fontsLoaded] = useFonts({
+//     SourceSansPro_300Light,
+//     SourceSansPro_300Light_Italic,
+//     SourceSansPro_400Regular,
+//     SourceSansPro_400Regular_Italic,
+//     SourceSansPro_600SemiBold,
+//     SourceSansPro_600SemiBold_Italic,
+//     SourceSansPro_700Bold,
+//   });
 
-  constructor(props){
-    super(props);
-    this.state = {
-      nome: '',
-      idade: '',
-      sexo: 0,
-      sexos: [
-        {sexoNome: 'Masculino', valor: 1},
-        {sexoNome: 'Feminino', valor: 2},
-      ],
-      limite: 1000,
-      estudante: false,
-    };
+  export default class App extends Component {
 
-    this.enviarDados = this.enviarDados.bind(this);
+    constructor(props) {
+      super(props);
+      this.state = {
+        nome: '',
+        email: '',
+        telefone: '',
+        endereco: '',
+        numero: '',
+        complemento: '',
+        cidade: '',
+        estado: '',
+        cep: '',
+        senha: '',
+        senha_rep: '',
+        termos: false,
+      };
 
-  }
+      this.enviarDados = this.enviarDados.bind(this);
 
-  //Metodo que é chamado quando você clica no botao Abrir Conta
-  enviarDados(){
-
-  if(this.state.nome === '' || this.state.idade === ''){
-      alert('Preencha todos dados corretamente!')
-      return;
     }
 
-    alert(
-      'Conta aberta com sucesso!! \n\n' + 
-      'Nome: '+this.state.nome + '\n' + 
-      'Idade: ' + this.state.idade + '\n' +
-      'Sexo: '+ this.state.sexos[this.state.sexo].sexoNome + ' \n' +
-      'Limite Conta: ' + this.state.limite.toFixed(2) + '\n' +
-      'Conta Estudante: ' + ((this.state.estudante)? 'Ativo' : 'Inativo')
+    //Metodo que é chamado quando você clica no botao Abrir Conta
+    enviarDados() {
+
+      if (this.state.nome === '' || this.state.email === '') {
+        alert('Preencha todos dados corretamente!')
+        return;
+      }
+
+      alert(
+        'Cadastro feito com sucesso! \n\n' +
+        'Nome: ' + this.state.nome + '\n' +
+        'E-mail: ' + this.state.email + '\n' +
+        'Telefone: ' + this.state.telefone + ' \n' +
+        'Endereço: ' + this.state.endereco + ' \n' +
+        'Nº: ' + this.state.numero + ' \n' +
+        'Complemento: ' + this.state.complemento + ' \n' +
+        'Cidade: ' + this.state.cidade + ' \n' +
+        'Estado: ' + this.state.estado + ' \n' +
+        'CEP: ' + this.state.cep + ' \n' +
+        'Senha: ' + this.state.senha + ' \n' +
+        'Repetir a senha: ' + this.state.senha_rep + ' \n' +
+        'Termos: ' + ((this.state.termos) ? 'Aceito' : 'Não aceito')
       );
-  
-  }
+
+    }
 
 
-  render(){
+    render() {
 
-    //Retorna os items do Picker do sexo M ou F
-    let sexoItems = this.state.sexos.map((v, k) => {
-      return <Picker.Item key={k} value={k} label={v.sexoNome}/>
-    }); 
+      return (
+        <View style={styles.container}>
+          <Text style={styles.title}>Preencha os campos abaixo para completar o seu cadastro</Text>
 
-    return(
-      <View style={styles.container}>
-      <Text style={styles.bancoLogo}>Banco DmD</Text>
+          <View style={styles.areaFormulario}>
 
-      <View style={styles.areaFormulario}>
+            <View>
+              <TextInput style={styles.input}
+                placeholder="Nome completo"
+                underlineColorAndroid="transparent"
+                onChangeText={(texto) => this.setState({ nome: texto })}
+              />
 
-      <View>
-        <Text style={styles.textoNome}>Nome:</Text>
-        <TextInput style={styles.input}
-            placeholder="Digite seu nome"
-            underlineColorAndroid="transparent"
-            onChangeText={(texto) => this.setState({nome: texto})}
-            
-        />
+              <TextInput style={styles.input}
+                placeholder="E-mail"
+                underlineColorAndroid="transparent"
+                onChangeText={(texto) => this.setState({ email: texto })}
+              />
 
-        <Text style={styles.textoNome}>Idade:</Text>
-        <TextInput style={styles.input}
-            
-            placeholder="Digite sua idade"
-            underlineColorAndroid="transparent"
-            onChangeText={(texto) => this.setState({idade: texto})}
-            keyboardType="numeric" // Deixando teclado apenas numerico
-        />
-     </View>
-        <View style={styles.areaSexo}>  
-          <Text style={styles.textoNome}>Sexo:</Text>
-          <Picker style={styles.pickerSexo} 
-                  selectedValue={this.state.sexo} 
-                  onValueChange={(itemValue, itemIndex) => this.setState({sexo: itemValue})}>  
-                            
-          {sexoItems}
-          
-          </Picker>
+              <TextInput style={styles.input}
+                placeholder="Telefone"
+                underlineColorAndroid="transparent"
+                onChangeText={(texto) => this.setState({ telefone: texto })}
+              />
+
+              <TextInput style={styles.input}
+                placeholder="Endereço"
+                underlineColorAndroid="transparent"
+                onChangeText={(texto) => this.setState({ endereco: texto })}
+              />
+
+              <TextInput style={styles.input}
+                placeholder="Nº"
+                underlineColorAndroid="transparent"
+                onChangeText={(texto) => this.setState({ numero: texto })}
+              />
+
+              <TextInput style={styles.input}
+                placeholder="Complemento"
+                underlineColorAndroid="transparent"
+                onChangeText={(texto) => this.setState({ complemento: texto })}
+              />
+
+              <TextInput style={styles.input}
+                placeholder="Cidade"
+                underlineColorAndroid="transparent"
+                onChangeText={(texto) => this.setState({ cidade: texto })}
+              />
+
+              <TextInput style={styles.input}
+                placeholder="Estado"
+                underlineColorAndroid="transparent"
+                onChangeText={(texto) => this.setState({ estado: texto })}
+              />
+
+              <TextInput style={styles.input}
+                placeholder="CEP"
+                underlineColorAndroid="transparent"
+                onChangeText={(texto) => this.setState({ cep: texto })}
+              />
+
+              <TextInput style={styles.input}
+                placeholder="Senha"
+                underlineColorAndroid="transparent"
+                onChangeText={(texto) => this.setState({ senha: texto })}
+              />
+
+              <TextInput style={styles.input}
+                placeholder="Repetir senha"
+                underlineColorAndroid="transparent"
+                onChangeText={(texto) => this.setState({ senha_rep: texto })}
+              />
+
+            </View>
+
+            <View style={styles.checkboxTermos}>
+              <Switch
+                style={{ paddingTop: 15 }}
+                trackColor="#00c300"
+                value={this.state.estudante}
+                onValueChange={(valorEstudante) => this.setState({ estudante: valorEstudante })}
+              />
+              <Text style={styles.textoNome}>Termos</Text>
+            </View>
+
+
+
+            <TouchableOpacity style={styles.botao} onPress={this.enviarDados} underlayColor="#D8A35D">
+              <Text style={styles.botaoTexto}>Finalizar</Text>
+            </TouchableOpacity>
+
+
+          </View>
+
         </View>
+      );
 
-        <View style={styles.limiteArea}>
-              <Text style={styles.textoNome}>Seu Limite:</Text>
-              <Text style={styles.limiteTexto}>R$ {this.state.limite.toFixed(0)}</Text>
-        </View> 
-
-        {/* <View style={styles.areaSlider}>
-            <Slider 
-              minimumTrackTintColor="#CF0000" 
-              minimumValue={250} 
-              maximumValue={4000}
-              value={this.state.limite}
-              onValueChange={(limite)=> this.setState({limite: limite})}
-            />
-        </View> */}
-
-
-        <View style={styles.areaEstudante}>
-          <Text style={styles.textoNome}>Estudante:</Text>
-          <Switch 
-          style={{paddingTop: 15}}
-          trackColor="#00c300" 
-          value={this.state.estudante} 
-          onValueChange={(valorEstudante) => this.setState({estudante: valorEstudante})}
-          />
-        </View>
-
-
-      
-        <TouchableOpacity style={styles.botao} onPress={this.enviarDados} underlayColor="#000000">
-            <Text style={styles.botaoTexto}>Abrir Conta</Text>
-        </TouchableOpacity>
-  
-
-      </View>
-
-      </View>    
-    );
+    }
 
   }
-
-}
-
-const styles = StyleSheet.create({
-  container:{
-    paddingTop: 20,
-    flex: 1,
-  },
-  areaFormulario:{
-    flexDirection: 'column',
-    margin: 10,
-  },
-  bancoLogo:{
-    textAlign: 'center',
-    fontSize: 30,
-    fontWeight: 'bold',
-    color: '#000000'
-  },
-  textoNome:{
-    fontSize: 17,
-    color: '#000000',
-    fontWeight: 'bold',
-  },
-  input:{
-    borderWidth: 1,
-    borderRadius: 4,
-    borderColor: '#999999',
-    backgroundColor: '#EEEEEE',
-    color: '#000000',
-    height: 38,
-    padding: 10,
-    marginBottom: 5,
-    marginTop: 5,
-  },
-  areaSexo:{
-     flexDirection: 'row',
-     alignItems: 'center',
-     paddingBottom: 5
- },
- pickerSexo:{
-    flex:1
-  },
-  limiteArea:{
-    flexDirection:'row',
-    paddingBottom: 5,
-},
-limiteTexto:{
-  color: '#FF0000',
-  fontSize: 17,
-  fontWeight: 'bold',
-  paddingLeft: 5,
-},
-areaEstudante:{
-  flexDirection: 'row', 
-  alignItems: 'center'
-},
-botao:{
- height: 35,
- justifyContent: 'center',
- alignItems: 'center',
- backgroundColor: '#000000',
- borderRadius: 150,
- margin: 20
-},
-botaoTexto:{
-   fontSize: 20,
-   fontWeight: 'bold',
-   color: '#FFFFFF'
-},
-
-});
-
-
