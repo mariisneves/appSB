@@ -1,3 +1,4 @@
+import { SourceSansPro_400Regular, SourceSansPro_700Bold_Italic } from '@expo-google-fonts/source-sans-pro';
 import React from 'react';
 import { StyleSheet } from 'react-native';
 
@@ -32,6 +33,7 @@ export default StyleSheet.create({
     fontSize: 25,
     color: '#5B352C',
     marginVertical: 25,
+    fontFamily: "SourceSansPro_400Regular",
   },
 
   doisForms: {
@@ -43,6 +45,7 @@ export default StyleSheet.create({
     fontSize: 18,
     color: '#5B352C',
     marginStart: 10,
+    fontFamily: "SourceSansPro_400Regular",
   },
 
   input: {
@@ -54,6 +57,7 @@ export default StyleSheet.create({
     marginTop: 5,
     placeholderTextColor: '#5B352C',
     fontSize: 18,
+    fontFamily: "SourceSansPro_400Regular",
   },
 
   inputDois: {
@@ -66,12 +70,14 @@ export default StyleSheet.create({
     placeholderTextColor: '#5B352C',
     fontSize: 18,
     width: '49%',
+    fontFamily: "SourceSansPro_400Regular",
   },
 
   switchTermos: {
     flexDirection: 'row',
     alignItems: 'center',
     marginTop: 15,
+    
   },
 
   botao: {
@@ -86,7 +92,8 @@ export default StyleSheet.create({
   botaoTexto: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: '#D8A35D'
+    color: '#D8A35D',
+    fontFamily: "SourceSansPro_600SemiBold",
   },
 
 });

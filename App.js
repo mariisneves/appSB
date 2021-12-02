@@ -1,6 +1,5 @@
-import { StatusBar } from 'expo-status-bar';
-import React, { Component } from 'react';
-import { View, Text, StyleSheet, Switch, Chechbox, TextInput, TouchableOpacity, Image } from 'react-native';
+import React, { Component, useState, useEffect } from 'react';
+import { View, Text, StyleSheet, TextInput, Image, TouchableOpacity, Switch } from 'react-native';
 import styles from './assets/estilo';
 import btnvoltar from './assets/btn-volta.png';
 import firebase from './assets/firebaseConnect';
@@ -11,69 +10,70 @@ import {
   SourceSansPro_700Bold,
 } from '@expo-google-fonts/source-sans-pro';
 
-// export default function App() {
-// let [fontsLoaded] = useFonts({
-//   SourceSansPro_300Light,
-//   SourceSansPro_300Light_Italic,
-//   SourceSansPro_400Regular,
-//   SourceSansPro_400Regular_Italic,
-//   SourceSansPro_600SemiBold,
-//   SourceSansPro_600SemiBold_Italic,
-//   SourceSansPro_700Bold,
-// });
+console.disableYellowBox = true;
+export default function App() {
 
-export default class App extends Component {
+  let [fontsLoaded] = useFonts({
+      SourceSansPro_300Light,
+      SourceSansPro_300Light_Italic,
+      SourceSansPro_400Regular,
+      SourceSansPro_400Regular_Italic,
+      SourceSansPro_600SemiBold,
+      SourceSansPro_600SemiBold_Italic,
+      SourceSansPro_700Bold,
+    });
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      nome: '',
-      email: '',
-      telefone: '',
-      endereco: '',
-      numero: '',
-      complemento: '',
-      cidade: '',
-      estado: '',
-      cep: '',
-      senha: '',
-      senha_rep: '',
-      termos: false,
-    };
+  const [nome, setNome] = useState();
+  const [email, setEmail] = useState();
+  const [telefone, setTelefone] = useState();
+  const [endereco, setEndereco] = useState();
+  const [numero, setNumero] = useState();
+  const [complemento, setComplemento] = useState();
+  const [cidade, setCidade] = useState();
+  const [estado, setEstado] = useState();
+  const [cep, setCep] = useState();
+  const [senha, setSenha] = useState();
+  const [senha_rep, setSenhaRep] = useState();
+  const [termos, setTermos] = useState(false);
+  const toggleSwitch = () => setTermos(previousState => !previousState);
 
-    this.enviarDados = this.enviarDados.bind(this);
+  async function cadastrar() {
+    if (nome !== '' & email !== '') {
+      let usuarios = await firebase.database().ref('Clientes');
+      let chave = usuarios.push().key;
+      usuarios.child(chave).set({
+        nome: nome,
+        email: email,
+        telefone: telefone,
+        endereco: endereco,
+        numero: numero,
+        complemento: complemento,
+        cidade: cidade,
+        estado: estado,
+        cep: cep,
+        senha: senha,
+        senha_rep: senha_rep,
+        termos: termos ? 'Aceito' : 'Não aceito'
+      });
 
-  }
-
-  //Metodo que é chamado quando você clica no botao Abrir Conta
-  enviarDados() {
-
-    if (this.state.nome === '' || this.state.email === '') {
-      alert('Preencha todos dados corretamente!')
-      return;
+      alert('Cadastro feito com sucesso!');
+      setNome('');
+      setEmail('');
+      setTelefone('');
+      setEndereco('');
+      setNumero('');
+      setComplemento('');
+      setCidade('');
+      setEstado('');
+      setCep('');
+      setSenha('');
+      setSenhaRep('');
+      setTermos
+    } else {
+      alert('Os dados devem ser preenchidos');
     }
-
-    alert(
-      'Cadastro feito com sucesso! \n\n' +
-      'Nome: ' + this.state.nome + '\n' +
-      'E-mail: ' + this.state.email + '\n' +
-      'Telefone: ' + this.state.telefone + ' \n' +
-      'Endereço: ' + this.state.endereco + ' \n' +
-      'Nº: ' + this.state.numero + ' \n' +
-      'Complemento: ' + this.state.complemento + ' \n' +
-      'Cidade: ' + this.state.cidade + ' \n' +
-      'Estado: ' + this.state.estado + ' \n' +
-      'CEP: ' + this.state.cep + ' \n' +
-      'Senha: ' + this.state.senha + ' \n' +
-      'Repetir a senha: ' + this.state.senha_rep + ' \n' +
-      'Termos: ' + ((this.state.termos) ? 'Aceito' : 'Não aceito')
-    );
-
   }
-
-
-  render() {
-
+  
     return (
       <View style={styles.container}>
         <Image source={btnvoltar} style={styles.btnvoltar} />
@@ -85,38 +85,44 @@ export default class App extends Component {
               <TextInput style={styles.input}
                 placeholder="Nome completo"
                 underlineColorAndroid="transparent"
-                onChangeText={(texto) => this.setState({ nome: texto })}
+                onChangeText={(texto) => setNome(texto)}
+                value={nome}
               />
 
               <TextInput style={styles.input}
                 placeholder="E-mail"
                 underlineColorAndroid="transparent"
-                onChangeText={(texto) => this.setState({ email: texto })}
+                onChangeText={(texto) => setEmail(texto)}
+                value={email}
               />
 
               <TextInput style={styles.input}
                 placeholder="Telefone"
                 underlineColorAndroid="transparent"
-                onChangeText={(texto) => this.setState({ telefone: texto })}
+                onChangeText={(texto) => setTelefone(texto)}
+                value={telefone}
               />
 
               <TextInput style={styles.input}
                 placeholder="Endereço"
                 underlineColorAndroid="transparent"
-                onChangeText={(texto) => this.setState({ endereco: texto })}
+                onChangeText={(texto) => setEndereco(texto)}
+                value={endereco}
               />
 
               <View style={styles.doisForms}>
                 <TextInput style={styles.inputDois}
                   placeholder="Nº"
                   underlineColorAndroid="transparent"
-                  onChangeText={(texto) => this.setState({ numero: texto })}
+                  onChangeText={(texto) => setNumero(texto)}
+                  value={numero}
                 />
 
                 <TextInput style={styles.inputDois}
                   placeholder="Complemento"
                   underlineColorAndroid="transparent"
-                  onChangeText={(texto) => this.setState({ complemento: texto })}
+                  onChangeText={(texto) => setComplemento(texto)}
+                  value={complemento}
                 />
               </View>
 
@@ -124,49 +130,70 @@ export default class App extends Component {
                 <TextInput style={styles.inputDois}
                   placeholder="Cidade"
                   underlineColorAndroid="transparent"
-                  onChangeText={(texto) => this.setState({ cidade: texto })}
+                  onChangeText={(texto) => setCidade(texto)}
+                  value={cidade}
                 />
 
                 <TextInput style={styles.inputDois}
                   placeholder="Estado"
                   underlineColorAndroid="transparent"
-                  onChangeText={(texto) => this.setState({ estado: texto })}
+                  onChangeText={(texto) => setEstado(texto)}
+                  value={estado}
                 />
               </View>
 
               <TextInput style={styles.input}
                 placeholder="CEP"
                 underlineColorAndroid="transparent"
-                onChangeText={(texto) => this.setState({ cep: texto })}
+                onChangeText={(texto) => setCep(texto)}
+                value={cep}
               />
 
               <TextInput style={styles.input}
                 placeholder="Senha"
                 underlineColorAndroid="transparent"
-                onChangeText={(texto) => this.setState({ senha: texto })}
+                onChangeText={(texto) => setSenha(texto)}
+                value={senha}
               />
 
               <TextInput style={styles.input}
                 placeholder="Repetir senha"
                 underlineColorAndroid="transparent"
-                onChangeText={(texto) => this.setState({ senha_rep: texto })}
+                onChangeText={(texto) => setSenhaRep(texto)}
+                value={senha_rep}
               />
 
             </View>
 
             <View style={styles.switchTermos}>
-              <Switch
+              {/* <Switch
                 style={{ paddingTop: 15 }}
                 trackColor={{ false: "#767577", true: "#5B352C" }}
-                value={this.state.termos}
-                onValueChange={(valorTermos) => this.setState({ termos: valorTermos })}
-              />
+                value={termos}
+                onValueChange={(valorTermos) => setTermos(valorTermos)}
+              /> */}
+
+            <Switch
+              style={{ paddingTop: 15 }}
+              trackColor={{ false: "#767577", true: "#5B352C" }}
+              // thumbColor={termos ? "#5B352C" : "#f4f3f4"}
+              // ios_backgroundColor="#3e3e3e"
+              onValueChange={toggleSwitch}
+              value={termos}
+            />  
               <Text style={styles.textoNome}>Li e aceito os termos e condições.</Text>
             </View>
 
-            <TouchableOpacity style={styles.botao} onPress={this.enviarDados} underlayColor="#D8A35D">
+            <TouchableOpacity style={styles.botao} 
+              onPress={cadastrar}
+              underlayColor="#D8A35D">
               <Text style={styles.botaoTexto}>Finalizar</Text>
             </TouchableOpacity>
+
+            {/* <Button style={styles.botao}
+              title="Finalizaaaaar"
+              onPress={cadastrar}
+            /> */}
 
           </View>
         </View>
@@ -176,4 +203,4 @@ export default class App extends Component {
 
   }
 
-}
+
