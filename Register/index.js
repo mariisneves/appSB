@@ -1,5 +1,5 @@
 import React, { Component, useState, useEffect } from 'react';
-import { View, Text, StyleSheet, TextInput, Image, TouchableOpacity, Switch } from 'react-native';
+import { View, Text, StyleSheet, TextInput, Image, TouchableOpacity, Switch, StatusBar, ScrollView } from 'react-native';
 import styles from './estilo';
 import btnvoltar from '../assets/btn-volta.png';
 import firebase from '../assets/firebaseConnect';
@@ -102,6 +102,8 @@ export default function App() {
 
 return (
   <View style={styles.container}>
+    <ScrollView>
+    <StatusBar />
     <Image source={btnvoltar} style={styles.btnvoltar} />
     <View style={styles.containerFormulario}>
       <Text style={styles.title}>Preencha os campos abaixo para completar o seu cadastro</Text>
@@ -110,6 +112,7 @@ return (
         <View>
           <TextInput style={styles.input}
             placeholder="Nome completo"
+            placeholderTextColor='#5B352C'
             underlineColorAndroid="transparent"
             onChangeText={(texto) => setNome(texto)}
             value={nome}
@@ -117,6 +120,7 @@ return (
 
           <TextInput style={styles.input}
             placeholder="E-mail"
+            placeholderTextColor='#5B352C'
             underlineColorAndroid="transparent"
             onChangeText={(texto) => setEmail(texto)}
             value={email}
@@ -124,6 +128,7 @@ return (
 
           <TextInput style={styles.input}
             placeholder="Telefone"
+            placeholderTextColor='#5B352C'
             underlineColorAndroid="transparent"
             onChangeText={(texto) => setTelefone(texto)}
             value={telefone}
@@ -131,6 +136,7 @@ return (
 
           <TextInput style={styles.input}
             placeholder="Endereço"
+            placeholderTextColor='#5B352C'
             underlineColorAndroid="transparent"
             onChangeText={(texto) => setEndereco(texto)}
             value={endereco}
@@ -139,6 +145,7 @@ return (
           <View style={styles.doisForms}>
             <TextInput style={styles.inputDois}
               placeholder="Nº"
+              placeholderTextColor='#5B352C'
               underlineColorAndroid="transparent"
               onChangeText={(texto) => setNumero(texto)}
               value={numero}
@@ -146,6 +153,7 @@ return (
 
             <TextInput style={styles.inputDois}
               placeholder="Complemento"
+              placeholderTextColor='#5B352C'
               underlineColorAndroid="transparent"
               onChangeText={(texto) => setComplemento(texto)}
               value={complemento}
@@ -155,6 +163,7 @@ return (
           <View style={styles.doisForms}>
             <TextInput style={styles.inputDois}
               placeholder="Cidade"
+              placeholderTextColor='#5B352C'
               underlineColorAndroid="transparent"
               onChangeText={(texto) => setCidade(texto)}
               value={cidade}
@@ -162,6 +171,7 @@ return (
 
             <TextInput style={styles.inputDois}
               placeholder="Estado"
+              placeholderTextColor='#5B352C'
               underlineColorAndroid="transparent"
               onChangeText={(texto) => setEstado(texto)}
               value={estado}
@@ -170,6 +180,7 @@ return (
 
           <TextInput style={styles.input}
             placeholder="CEP"
+            placeholderTextColor='#5B352C'
             underlineColorAndroid="transparent"
             onChangeText={(texto) => setCep(texto)}
             value={cep}
@@ -177,6 +188,7 @@ return (
 
           <TextInput style={styles.input}
             placeholder="Senha"
+            placeholderTextColor='#5B352C'
             underlineColorAndroid="transparent"
             onChangeText={(texto) => setSenha(texto)}
             value={senha}
@@ -184,6 +196,7 @@ return (
 
           <TextInput style={styles.input}
             placeholder="Repetir senha"
+            placeholderTextColor='#5B352C'
             underlineColorAndroid="transparent"
             onChangeText={(texto) => setSenhaRep(texto)}
             value={senha_rep}
@@ -194,10 +207,8 @@ return (
         <View style={styles.switchTermos}>
 
           <Switch
-            style={{ paddingTop: 15 }}
+            // style={{ paddingTop: 15 }}
             trackColor={{ false: "#767577", true: "#5B352C" }}
-            // thumbColor={termos ? "#5B352C" : "#f4f3f4"}
-            // ios_backgroundColor="#3e3e3e"
             onValueChange={toggleSwitch}
             value={termos}
           />
@@ -212,10 +223,8 @@ return (
 
       </View>
     </View>
-
+    </ScrollView>
   </View >
 );
 
 }
-
-

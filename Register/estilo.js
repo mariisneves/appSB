@@ -25,7 +25,6 @@ export default StyleSheet.create({
   areaFormulario: {
     flexDirection: 'column',
     backgroundColor: '#FFF',
-    flex: 1,
   },
 
   title: {
@@ -55,7 +54,6 @@ export default StyleSheet.create({
     padding: 10,
     marginBottom: 5,
     marginTop: 5,
-    placeholderTextColor: '#5B352C',
     fontSize: 18,
     fontFamily: "SourceSansPro_400Regular",
   },
@@ -67,7 +65,6 @@ export default StyleSheet.create({
     padding: 10,
     marginBottom: 5,
     marginTop: 5,
-    placeholderTextColor: '#5B352C',
     fontSize: 18,
     width: '49%',
     fontFamily: "SourceSansPro_400Regular",
@@ -76,8 +73,6 @@ export default StyleSheet.create({
   switchTermos: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginTop: 15,
-    
   },
 
   botao: {
@@ -85,7 +80,7 @@ export default StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#5B352C',
-    marginTop: 50,
+    marginTop: 20,
     marginBottom: 20,
   },
 

@@ -6,6 +6,8 @@ export default StyleSheet.create({
 
   container: {
     backgroundColor: '#D8A35D',
+    // paddingTop: 25,
+    // flex: 1,
   },
 
   btnvoltar: {
@@ -24,7 +26,6 @@ export default StyleSheet.create({
 
   areaTermos: {
     backgroundColor: '#FFF',
-    flex: 1,
   },
 
   title: {
@@ -47,7 +48,7 @@ export default StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#5B352C',
-    marginTop: 50,
+    marginTop: 20,
     marginBottom: 20,
   },
 
