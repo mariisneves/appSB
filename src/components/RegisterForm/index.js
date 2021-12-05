@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -31,6 +31,7 @@ export default function RegisterForm() {
   const toggleSwitch = () => setTermos((previousState) => !previousState);
   const [messagem, setMensagem] = useState();
   const [isRegistred, setIsRegistred] = useState();
+  const [isEnabled, setIsEnabled] = useState();
 
   const { navigate, goBack } = useNavigation();
 
@@ -98,6 +99,18 @@ export default function RegisterForm() {
   }
 
   LogBox.ignoreAllLogs(true);
+
+  useEffect(() => {
+    if (senha == "") {
+      setMensagem("Por favor, informe a senha");
+    } else if (senha_rep == "") {
+      setMensagem("Por favor, confirme a senha");
+    } else if (senha != senha_rep) {
+      setMensagem("As senhas não são iguais");
+    } else {
+      setMensagem("");
+    }
+  }, [senha, senha_rep]);
 
   return (
     <View style={styles.container}>
@@ -218,7 +231,6 @@ export default function RegisterForm() {
 
             <View style={styles.switchTermos}>
               <Switch
-                // style={{ paddingTop: 15 }}
                 trackColor={{ false: "#767577", true: "#5B352C" }}
                 onValueChange={toggleSwitch}
                 value={termos}
