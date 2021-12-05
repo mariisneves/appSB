@@ -1,7 +1,3 @@
-import {
-  SourceSansPro_400Regular,
-  SourceSansPro_700Bold_Italic,
-} from "@expo-google-fonts/source-sans-pro";
 import React from "react";
 import { StyleSheet } from "react-native";
 

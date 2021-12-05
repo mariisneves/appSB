@@ -1,6 +1,8 @@
+<<<<<<< HEAD
 import React from "react";
 import { StatusBar } from "expo-status-bar";
 import AppLoading from "expo-app-loading";
+
 import {
   SourceSansPro_300Light,
   SourceSansPro_300Light_Italic,

@@ -1,6 +1,5 @@
 import React from "react";
 import { View, Text, Image, TouchableOpacity, StatusBar } from "react-native";
-import btnVoltar from "../../assets/images/btn-volta.png";
 import { ScrollView } from "react-native-gesture-handler";
 
 import styles from "./style";
