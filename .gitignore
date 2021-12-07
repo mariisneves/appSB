@@ -1,5 +1,9 @@
 .node_modules/
 .env/
+.env
+.env.example
+.env.local
+.env.staging
 .expo/
 web-build/
 node_modules/**/*
