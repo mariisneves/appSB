@@ -32,7 +32,7 @@ export default function Login() {
 
           let user = userCredential.user;
 
-          navigate("Welcome", { idUser: user.email });
+          navigate("Home", { idUser: user.email });
         })
         .catch((error) => {
           setMessage("Ooops. Algo deu errado. \n" + error.message);
@@ -67,6 +67,7 @@ export default function Login() {
         onChangeText={(password) => setPassword(password)}
         placeholder="Senha"
         keyboardType="password"
+        secureTextEntry={true}
       />
 
       <TouchableOpacity

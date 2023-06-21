@@ -18,18 +18,12 @@ import { useNavigation } from "@react-navigation/core";
 export default function RegisterForm() {
   const [nome, setNome] = useState();
   const [email, setEmail] = useState();
-  const [telefone, setTelefone] = useState();
-  const [endereco, setEndereco] = useState();
-  const [numero, setNumero] = useState();
-  const [complemento, setComplemento] = useState();
-  const [cidade, setCidade] = useState();
-  const [estado, setEstado] = useState();
-  const [cep, setCep] = useState();
   const [senha, setSenha] = useState();
   const [senha_rep, setSenhaRep] = useState();
   const [termos, setTermos] = useState(false);
   const toggleSwitch = () => setTermos((previousState) => !previousState);
   const [messagem, setMensagem] = useState();
+  const [emailMessage, setEmailMessage] = useState();
   const [isRegistred, setIsRegistred] = useState();
   const [isEnabled, setIsEnabled] = useState();
 
@@ -66,13 +60,6 @@ export default function RegisterForm() {
       usuarios.child(chave).set({
         nome: nome,
         email: email,
-        telefone: telefone,
-        endereco: endereco,
-        numero: numero,
-        complemento: complemento,
-        cidade: cidade,
-        estado: estado,
-        cep: cep,
         senha: senha,
         senha_rep: senha_rep,
         termos: termos ? "Aceito" : "Não aceito",
@@ -81,13 +68,6 @@ export default function RegisterForm() {
       alert("Cadastro feito com sucesso!");
       setNome("");
       setEmail("");
-      setTelefone("");
-      setEndereco("");
-      setNumero("");
-      setComplemento("");
-      setCidade("");
-      setEstado("");
-      setCep("");
       setSenha("");
       setSenhaRep("");
       setTermos;
@@ -100,6 +80,18 @@ export default function RegisterForm() {
 
   LogBox.ignoreAllLogs(true);
 
+  // email validation
+  useEffect(() => {
+    let emailLength = email?.length
+
+    if (emailLength > 0 && !(email.includes('.com'))) {
+      setEmailMessage("Por favor, informe um e-mail válido");
+    } else {
+      setEmailMessage("");
+    }
+  }, [email]);
+
+  // password validation
   useEffect(() => {
     if (senha == "") {
       setMensagem("Por favor, informe a senha");
@@ -127,7 +119,7 @@ export default function RegisterForm() {
             <View>
               <TextInput
                 style={styles.input}
-                placeholder="Nome completo"
+                placeholder="Nome"
                 placeholderTextColor="#5B352C"
                 underlineColorAndroid="transparent"
                 onChangeText={(texto) => setNome(texto)}
@@ -145,77 +137,11 @@ export default function RegisterForm() {
 
               <TextInput
                 style={styles.input}
-                placeholder="Telefone"
-                placeholderTextColor="#5B352C"
-                underlineColorAndroid="transparent"
-                onChangeText={(texto) => setTelefone(texto)}
-                value={telefone}
-              />
-
-              <TextInput
-                style={styles.input}
-                placeholder="Endereço"
-                placeholderTextColor="#5B352C"
-                underlineColorAndroid="transparent"
-                onChangeText={(texto) => setEndereco(texto)}
-                value={endereco}
-              />
-
-              <View style={styles.doisForms}>
-                <TextInput
-                  style={styles.inputDois}
-                  placeholder="Nº"
-                  placeholderTextColor="#5B352C"
-                  underlineColorAndroid="transparent"
-                  onChangeText={(texto) => setNumero(texto)}
-                  value={numero}
-                />
-
-                <TextInput
-                  style={styles.inputDois}
-                  placeholder="Complemento"
-                  placeholderTextColor="#5B352C"
-                  underlineColorAndroid="transparent"
-                  onChangeText={(texto) => setComplemento(texto)}
-                  value={complemento}
-                />
-              </View>
-
-              <View style={styles.doisForms}>
-                <TextInput
-                  style={styles.inputDois}
-                  placeholder="Cidade"
-                  placeholderTextColor="#5B352C"
-                  underlineColorAndroid="transparent"
-                  onChangeText={(texto) => setCidade(texto)}
-                  value={cidade}
-                />
-
-                <TextInput
-                  style={styles.inputDois}
-                  placeholder="Estado"
-                  placeholderTextColor="#5B352C"
-                  underlineColorAndroid="transparent"
-                  onChangeText={(texto) => setEstado(texto)}
-                  value={estado}
-                />
-              </View>
-
-              <TextInput
-                style={styles.input}
-                placeholder="CEP"
-                placeholderTextColor="#5B352C"
-                underlineColorAndroid="transparent"
-                onChangeText={(texto) => setCep(texto)}
-                value={cep}
-              />
-
-              <TextInput
-                style={styles.input}
                 placeholder="Senha"
                 placeholderTextColor="#5B352C"
                 underlineColorAndroid="transparent"
                 onChangeText={(texto) => setSenha(texto)}
+                secureTextEntry={true}
                 value={senha}
               />
 
@@ -225,6 +151,7 @@ export default function RegisterForm() {
                 placeholderTextColor="#5B352C"
                 underlineColorAndroid="transparent"
                 onChangeText={(texto) => setSenhaRep(texto)}
+                secureTextEntry={true}
                 value={senha_rep}
               />
             </View>
@@ -235,10 +162,10 @@ export default function RegisterForm() {
                 onValueChange={toggleSwitch}
                 value={termos}
               />
-              <Text style={styles.textoNome}>
-                Li e aceito os{" "}
+              <Text style={styles.textoTermos}>
+                Li e aceito os {''}
                 <Text
-                  style={styles.textoNome}
+                  style={styles.linkTermos}
                   onPress={() => navigate("Terms")}
                 >
                   termos e condições
@@ -248,17 +175,30 @@ export default function RegisterForm() {
             </View>
 
             {isRegistred ? null : (
-              <Text
-                style={{
-                  color: "#5B352C",
-                  fontWeight: "bold",
-                  alignSelf: "center",
-                  fontSize: 15,
-                  marginTop: 30,
-                }}
-              >
-                {messagem}
-              </Text>
+              <>
+                <Text
+                  style={{
+                    color: "#5B352C",
+                    fontWeight: "bold",
+                    alignSelf: "center",
+                    fontSize: 15,
+                    marginTop: 30,
+                  }}
+                >
+                  {messagem}
+                </Text>
+                <Text
+                  style={{
+                    color: "#5B352C",
+                    fontWeight: "bold",
+                    alignSelf: "center",
+                    fontSize: 15,
+                    marginTop: 30,
+                  }}
+                >
+                  {emailMessage}
+                </Text>
+              </>
             )}
 
             <TouchableOpacity

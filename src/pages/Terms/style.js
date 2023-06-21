@@ -8,6 +8,7 @@ import { StyleSheet } from "react-native";
 export default StyleSheet.create({
   container: {
     backgroundColor: "#D8A35D",
+    height: '100vh',
   },
 
   btnvoltar: {
@@ -22,6 +23,10 @@ export default StyleSheet.create({
     paddingHorizontal: 35,
     borderTopStartRadius: 20,
     borderTopEndRadius: 20,
+    marginTop: '25px',
+    height: 'calc(100vh - 25px)',
+    display: 'flex',
+    alignContent: 'flex-end'
   },
 
   areaTermos: {

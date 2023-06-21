@@ -4,7 +4,7 @@ import { StyleSheet } from "react-native";
 export default StyleSheet.create({
   container: {
     width: "100%",
-    height: "100%",
+    height: "100vh",
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
@@ -12,6 +12,8 @@ export default StyleSheet.create({
   },
   logo: {
     marginBottom: 40,
+    width: 301,
+    height: 140,
   },
   input: {
     width: "80%",
@@ -26,7 +28,7 @@ export default StyleSheet.create({
   },
   botao: {
     height: 43,
-    width: 315,
+    width: "80vw",
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#5B352C",
@@ -35,7 +37,7 @@ export default StyleSheet.create({
   },
   botaoVazado: {
     height: 43,
-    width: 315,
+    width: '80vw',
     justifyContent: "center",
     alignItems: "center",
     borderWidth: 3,

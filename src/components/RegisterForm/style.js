@@ -22,6 +22,7 @@ export default StyleSheet.create({
     paddingHorizontal: 35,
     borderTopStartRadius: 20,
     borderTopEndRadius: 20,
+    height: 'calc(100vh - 66px)',
   },
 
   areaFormulario: {
@@ -31,7 +32,7 @@ export default StyleSheet.create({
 
   title: {
     textAlign: "center",
-    fontSize: 25,
+    fontSize: 20,
     color: "#5B352C",
     marginVertical: 25,
     fontFamily: "SourceSansPro_400Regular",
@@ -75,6 +76,21 @@ export default StyleSheet.create({
   switchTermos: {
     flexDirection: "row",
     alignItems: "center",
+    marginTop: '15px',
+  },
+
+  textoTermos: {
+    fontSize: 16,
+    color: "#5B352C",
+    marginStart: 10,
+    fontFamily: "SourceSansPro_400Regular",
+  },
+
+  linkTermos: {
+    fontSize: 16,
+    color: "#5B352C",
+    fontFamily: "SourceSansPro_400Regular",
+    textDecorationLine: 'underline'
   },
 
   botao: {
