@@ -13,11 +13,11 @@ export default function AppStack() {
   return (
     <NavigationContainer>
       <Navigator screenOptions={{ headerShown: false }}>
+        <Screen name="ProductList" component={ProductList} />
         <Screen name="Login" component={Login} />
         <Screen name="Register" component={Register} />
         <Screen name="Welcome" component={Welcome} />
         <Screen name="Terms" component={Terms} />
-        <Screen name="ProductList" component={ProductList} />
       </Navigator>
     </NavigationContainer>
   );
