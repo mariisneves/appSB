@@ -16,6 +16,7 @@ export default function AppStack() {
         <Screen name="Register" component={Register} />
         <Screen name="Home" component={Home} />
         <Screen name="Terms" component={Terms} />
+        <Screen name="ProductList" component={ProductList} />
       </Navigator>
     </NavigationContainer>
   );
