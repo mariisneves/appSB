@@ -1,11 +1,10 @@
-import React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import Login from '../pages/Login';
-import Register from '../pages/Register';
-import Welcome from '../pages/Welcome';
-import Terms from '../pages/Terms';
-import ProductList from '../pages/ProductsList';
+import React from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+import Login from "../pages/Login";
+import Register from "../pages/Register";
+import Welcome from "../pages/Welcome";
+import Terms from "../pages/Terms";
 
 const { Navigator, Screen } = createStackNavigator();
 
