@@ -1,4 +1,4 @@
-import firebase from "firebase/compat/app";
+import firebase from 'firebase/compat/app';
 
 import {
   REACT_APP_APIKEY,
@@ -7,11 +7,10 @@ import {
   REACT_APP_STORAGEBUCKET,
   REACT_APP_SENDERID,
   REACT_APP_APPID,
-  REACT_APP_MESID,
-} from "@env";
+} from '@env';
 
-import "firebase/compat/database";
-import "firebase/compat/auth";
+import 'firebase/compat/database';
+import 'firebase/compat/auth';
 
 let firebaseConfig = {
   apiKey: REACT_APP_APIKEY,
@@ -20,7 +19,6 @@ let firebaseConfig = {
   storageBucket: REACT_APP_STORAGEBUCKET,
   messagingSenderId: REACT_APP_SENDERID,
   appId: REACT_APP_APPID,
-  measurementId: REACT_APP_MESID,
 };
 
 if (!firebase.apps.length) {
